@@ -1,6 +1,7 @@
 package com.example.btvn_calculator
 
 import android.os.Bundle
+import android.service.autofill.FillEventHistory
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -18,18 +19,20 @@ import com.example.btvn_calculator.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var viewDisplay: TextView
+    private lateinit var viewHistory: TextView
     private var currentInput = ""
     private var firstNumber = 0.0
     private var secondNumber = 0.0
     private var operation = ""
+    private var history = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         viewDisplay = findViewById(R.id.viewDisplay)
+        viewHistory = findViewById(R.id.viewhistory)
 
-        // Gán sự kiện click cho tất cả các nút
         val buttonIds = listOf(
             R.id.btn0, R.id.btn1,R.id.btn2, R.id.btn3,R.id.btn4, R.id.btn5,R.id.btn6, R.id.btn7,R.id.btn8, R.id.btn9,
             R.id.btnAdd, R.id.btnSub, R.id.btnMul, R.id.btnDiv, R.id.btnEqual,
@@ -45,6 +48,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         if (view is Button) {
             when (view.id) {
                 in R.id.btn0..R.id.btn9 -> appendNumber(view.text.toString())
+                R.id.btnDot -> appendNumber(view.text.toString())
                 R.id.btnAdd -> setOperation("+")
                 R.id.btnSub -> setOperation("-")
                 R.id.btnMul -> setOperation("×")
@@ -65,14 +69,18 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         if (currentInput.isNotEmpty()) {
             firstNumber = currentInput.toDouble()
             operation = op
+            history = firstNumber.toString() + operation
+            viewHistory.text = history
             currentInput = ""
-            viewDisplay.text = operation
+
         }
     }
 
     private fun calculateResult() {
         if (currentInput.isNotEmpty()) {
             secondNumber = currentInput.toDouble()
+            history = history + secondNumber.toString() + "="
+            viewHistory.text = history
             val result = when (operation) {
                 "+" -> firstNumber + secondNumber
                 "-" -> firstNumber - secondNumber
@@ -99,7 +107,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private fun removeLastDigit() {
         if (currentInput.isNotEmpty()) {
             currentInput = currentInput.dropLast(1)
-            viewDisplay.text = if (currentInput.isEmpty()) "0" else currentInput
+            viewDisplay.text = if (currentInput.isEmpty()) "" else currentInput
         }
     }
 }

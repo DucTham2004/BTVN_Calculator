@@ -9,15 +9,31 @@
         android:id="@+id/viewSpace"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:background="@color/white"
         android:text=""
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/viewName"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@color/white"/>
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/viewhistory"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/display_background"
+        android:gravity="right|center_vertical"
+        android:text=""
+        android:textColor="#A29C9C"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/viewDisplay"
+        app:layout_constraintTop_toBottomOf="@+id/viewName"
+        app:layout_constraintVertical_weight="0.5" />
 
     <TextView
         android:id="@+id/viewName"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@color/name_background"
         android:drawableLeft="@drawable/baseline_calculate_24"
@@ -25,39 +41,35 @@
         android:hapticFeedbackEnabled="false"
         android:text="@string/applicationName"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/viewDisplay"
+        app:layout_constraintBottom_toTopOf="@+id/viewhistory"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/viewSpace" />
+        app:layout_constraintTop_toBottomOf="@+id/viewSpace" />
 
     <TextView
         android:id="@+id/viewDisplay"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@color/display_background"
+        android:gravity="center_vertical|right"
         android:text="0"
-        app:layout_constraintVertical_weight="1"
+        android:textColor="@color/black"
+        android:textSize="60sp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="2"
         app:layout_constraintStart_toStartOf="parent"
-        android:gravity="center_vertical|right"
-        android:textSize="60sp"
-        android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@+id/viewName" />
+        app:layout_constraintTop_toBottomOf="@+id/viewhistory"
+        app:layout_constraintVertical_weight="2" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintVertical_weight="2"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewDisplay">
+        app:layout_constraintTop_toBottomOf="@+id/viewDisplay"
+        app:layout_constraintVertical_weight="4">
 
 
         <LinearLayout
